@@ -22,19 +22,19 @@ namespace Repose.Service
 
         public void Start() 
         {
-            log.Info("Starting service...");
+            log.Info("ReposeHost: Starting service...");
             RunProcess();
         }
 
         public void Stop()
         {
             log.Debug("Stopping service...");
-
+          
         }
 
         public void RunProcess()
         {
-           
+            
         }
 
         void repose_Exited(object sender, System.EventArgs e)

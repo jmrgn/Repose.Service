@@ -15,7 +15,7 @@ namespace Repose.Service
         static void Main(string[] args)
         {
             log4net.Config.XmlConfigurator.Configure();
-            
+
             log.Debug("Preparing to host the repose service");
             var config = new CommonConfig();
 
