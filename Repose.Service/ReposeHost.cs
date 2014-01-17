@@ -28,18 +28,46 @@ namespace Repose.Service
 
         public void Stop()
         {
-            log.Debug("Stopping service...");
-          
+            log.Info("Stopping service...");
+            if (repose != null && !repose.HasExited)
+            {
+                string args = string.Format("-jar {0} {1} -s {2}",
+                                                configuration.ReposePath,
+                                                configuration.StopAction,
+                                                configuration.Port);
+
+                Process.Start(configuration.JavaExecutablePath, args);
+            }
         }
 
         public void RunProcess()
         {
-            
+            try
+            {
+                string args = string.Format("-jar {0} {1} -s {2} -c {3}",
+                                                    configuration.ReposePath,
+                                                    configuration.StartAction,
+                                                    configuration.Port,
+                                                    configuration.ReposeConfigs);
+
+                var info = new ProcessStartInfo(configuration.JavaExecutablePath, args);
+                info.Verb = "runas";
+                log.Debug(string.Format("Starting the repose process with the following arguments: {0}", args));
+                repose = Process.Start(info);
+                repose.EnableRaisingEvents = true;
+                repose.Exited += repose_Exited;
+            }
+            catch (Exception ex)
+            {
+                Stop();
+                throw;
+            }
         }
 
         void repose_Exited(object sender, System.EventArgs e)
         {
-            // Log an error and stop
+            //TODO: Fill in additional information after initial testing
+            log.Error("Repose exited unexpectedly.");
             this.Stop();
         }
     }
