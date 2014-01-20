@@ -1,0 +1,23 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">	
+	<!-- <Import Project="tools\Rackspace.Common.Targets" /> -->
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+    <ToolsDirectory>$(MSBuildStartupDirectory)\Tools</ToolsDirectory>
+    <ArtifactDirectory>Artifacts</ArtifactDirectory>
+  </PropertyGroup>
+	<ItemGroup>
+		<Solutions Include="*.sln" />
+	</ItemGroup>
+    
+	<Target Name="Build" Outputs="@(BuildOutputs)">
+		<MSBuild Projects="@(Solutions)" Targets="Build" Properties="Configuration=$(Configuration)">
+			<Output TaskParameter="TargetOutputs" ItemName="BuildOutputs" />
+		</MSBuild>
+	</Target>
+	
+    <Target Name="Rebuild" Outputs="@(BuildOutputs)">
+		<MSBuild Projects="@(Solutions)" Targets="Rebuild" Properties="Configuration=$(Configuration)">
+			<Output TaskParameter="TargetOutputs" ItemName="BuildOutputs" />
+		</MSBuild>
+	</Target>
+</Project>

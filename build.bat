@@ -1,0 +1,1 @@
+msbuild.exe build.msbuild /t:Rebuild /p:Configuraiton=Debug
