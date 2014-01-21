@@ -1,15 +1,27 @@
 ﻿using System;
+using System.Collections.Specialized;
 using System.Configuration;
 
 namespace Repose.Service.Common
 {
-    public class CommonConfig : ICommonConfig
+    public class ReposeConfig : IReposeConfig
     {
+        private readonly NameValueCollection config;
+        public ReposeConfig(NameValueCollection collection)
+        {
+            this.config = collection;
+        }
+
+        public ReposeConfig()
+        {
+            config = ConfigurationManager.GetSection("repose") as NameValueCollection;
+        }
+
         public string JavaExecutablePath
         {
             get
             {
-                string value = ConfigurationManager.AppSettings["javaExecutablePath"];
+                string value = config["javaExecutablePath"];
                 if (string.IsNullOrWhiteSpace(value))
                 {
                     return string.Empty;
@@ -23,7 +35,7 @@ namespace Repose.Service.Common
         {
             get
             {
-                string value = ConfigurationManager.AppSettings["reposePath"];
+                string value = config["reposePath"];
                 if (string.IsNullOrWhiteSpace(value))
                 {
                     return string.Empty;
@@ -37,7 +49,7 @@ namespace Repose.Service.Common
         {
             get
             {
-                string value = ConfigurationManager.AppSettings["startAction"];
+                string value = config["startAction"];
                 if (string.IsNullOrWhiteSpace(value))
                 {
                     return string.Empty;
@@ -51,7 +63,7 @@ namespace Repose.Service.Common
         {
             get
             {
-                string value = ConfigurationManager.AppSettings["stopAction"];
+                string value = config["stopAction"];
                 if (string.IsNullOrWhiteSpace(value))
                 {
                     return string.Empty;
@@ -65,7 +77,7 @@ namespace Repose.Service.Common
         {
             get
             {
-                string value = ConfigurationManager.AppSettings["port"];
+                string value = config["port"];
                 if (string.IsNullOrWhiteSpace(value))
                 {
                     return string.Empty;
@@ -79,7 +91,7 @@ namespace Repose.Service.Common
         {
             get
             {
-                string value = ConfigurationManager.AppSettings["reposeConfigs"];
+                string value = config["reposeConfigs"];
                 if (string.IsNullOrWhiteSpace(value))
                 {
                     return string.Empty;

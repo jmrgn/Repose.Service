@@ -51,8 +51,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\CommonConfig.cs" />
-    <Compile Include="Common\ICommonConfig.cs" />
+    <Compile Include="Common\ReposeConfig.cs" />
+    <Compile Include="Common\IReposeConfig.cs" />
     <Compile Include="ReposeHost.cs" />
     <Compile Include="ReposeService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -61,6 +61,15 @@
     <None Include="App.config" />
     <None Include="Configuration\Log4Net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuration\Log4Net.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Configuration\Repose.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configuration\Repose.xsd">
+      <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

@@ -2,7 +2,7 @@
 
 namespace Repose.Service.Common
 {
-    public interface ICommonConfig
+    public interface IReposeConfig
     {
         string JavaExecutablePath { get; }
         string ReposePath { get; }

@@ -11,11 +11,11 @@ namespace Repose.Service
 {
     public class ReposeHost
     {
-        private readonly ICommonConfig configuration;
+        private readonly IReposeConfig configuration;
         private static ILog log = LogManager.GetLogger(typeof(ReposeService));
         public Process repose;
 
-        public ReposeHost(ICommonConfig config)
+        public ReposeHost(IReposeConfig config)
         {
             this.configuration = config;
         }
@@ -57,7 +57,7 @@ namespace Repose.Service
                 repose.EnableRaisingEvents = true;
                 repose.Exited += repose_Exited;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Stop();
                 throw;
@@ -66,8 +66,8 @@ namespace Repose.Service
 
         void repose_Exited(object sender, System.EventArgs e)
         {
-            //TODO: Fill in additional information after initial testing
-            log.Error("Repose exited unexpectedly.");
+            var errorMsg = "Repose exited unexpectedly at {0} with an exit code of {1}. Please check the repose logs for details.";
+            log.Error(string.Format(errorMsg, repose.ExitTime, repose.ExitTime));
             this.Stop();
         }
     }

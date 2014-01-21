@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,10 +16,10 @@ namespace Repose.Service
         private static ILog log = LogManager.GetLogger(typeof(ReposeService));
         static void Main(string[] args)
         {
-            log4net.Config.XmlConfigurator.Configure();
-
             log.Debug("Preparing to host the repose service");
-            var config = new CommonConfig();
+            var settings = ConfigurationManager.GetSection("repose") as NameValueCollection;
+            var config = new ReposeConfig(settings);
+            log4net.Config.XmlConfigurator.Configure();
 
             HostFactory.Run(x =>
             {
