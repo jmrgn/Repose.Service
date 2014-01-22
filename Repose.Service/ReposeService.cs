@@ -30,7 +30,6 @@ namespace Repose.Service
                     s.WhenStarted(r => r.Start());              
                     s.WhenStopped(r => r.Stop());              
                 });
-                x.RunAsLocalSystem();                            
                
                 x.SetDescription("Repose Windows Host");        
                 x.SetDisplayName("Repose.Service");                       

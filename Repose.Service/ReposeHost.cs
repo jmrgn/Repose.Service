@@ -44,15 +44,14 @@ namespace Repose.Service
         {
             try
             {
-                string args = string.Format("-jar {0} {1} -s {2} -c {3}",
+                string args = string.Format("-jar {0} {1} -c {2}",
                                                     configuration.ReposePath,
                                                     configuration.StartAction,
-                                                    configuration.Port,
                                                     configuration.ReposeConfigs);
 
                 var info = new ProcessStartInfo(configuration.JavaExecutablePath, args);
                 info.Verb = "runas";
-                log.Debug(string.Format("Starting the repose process with the following arguments: {0}", args));
+                log.Debug(string.Format("Starting the repose process with the following arguments: {0} {1}", configuration.JavaExecutablePath, args));
                 repose = Process.Start(info);
                 repose.EnableRaisingEvents = true;
                 repose.Exited += repose_Exited;
