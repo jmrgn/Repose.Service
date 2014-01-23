@@ -6,6 +6,7 @@ namespace Repose.Service.Common
 {
     public class ReposeConfig : IReposeConfig
     {
+        private static string MissingValue = "Missing configuration parameter: {0}";
         private readonly NameValueCollection config;
         public ReposeConfig(NameValueCollection collection)
         {
@@ -24,7 +25,7 @@ namespace Repose.Service.Common
                 string value = config["javaExecutablePath"];
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    return string.Empty;
+                    throw new ConfigurationErrorsException(string.Format(MissingValue, "javaExecutablePath"));
                 }
 
                 return value;
@@ -38,7 +39,7 @@ namespace Repose.Service.Common
                 string value = config["reposePath"];
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    return string.Empty;
+                    throw new ConfigurationErrorsException(string.Format(MissingValue, "reposePath"));
                 }
 
                 return value;
@@ -52,7 +53,7 @@ namespace Repose.Service.Common
                 string value = config["startAction"];
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    return string.Empty;
+                    throw new ConfigurationErrorsException(string.Format(MissingValue, "startAction"));
                 }
 
                 return value;
@@ -66,7 +67,7 @@ namespace Repose.Service.Common
                 string value = config["stopAction"];
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    return string.Empty;
+                    throw new ConfigurationErrorsException(string.Format(MissingValue, "stopAction"));
                 }
 
                 return value;
@@ -80,7 +81,7 @@ namespace Repose.Service.Common
                 string value = config["port"];
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    return string.Empty;
+                    throw new ConfigurationErrorsException(string.Format(MissingValue, "port"));
                 }
 
                 return value;
@@ -94,7 +95,7 @@ namespace Repose.Service.Common
                 string value = config["reposeConfigs"];
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    return string.Empty;
+                    throw new ConfigurationErrorsException(string.Format(MissingValue, "reposeConfigs"));
                 }
 
                 return value;
